@@ -1,0 +1,20 @@
+@import 'https://fonts.googleapis.com/css?family=Roboto';
+
+html {
+    font-family: 'Roboto', sans-serif;
+}
+
+.col-3, .col-4, .col-6, .col-12 {
+    border: 1px solid black;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+header .col-12 {
+    border: none;
+    padding: 0px;
+}
+
+.js-answer-picker-box .col-6 {
+    border-style: dashed;
+}
