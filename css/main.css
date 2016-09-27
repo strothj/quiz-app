@@ -18,3 +18,7 @@ header .col-12 {
 .js-answer-picker-box .col-6 {
     border-style: dashed;
 }
+
+.hidden {
+    visibility: hidden;
+}
