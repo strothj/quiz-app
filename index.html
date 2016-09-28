@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="Star Trek: TNG Quiz">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
     <link rel="stylesheet" href="css/grid.css">
     <link rel="stylesheet" href="css/main.css">
@@ -19,60 +20,43 @@
         </div>
     </header>
 
-    <main class="js-app">
-        
-    </main>
+    <div class="container">
 
-    <!--<main>
-        <div class="row js-progress-box hidden">
-            <div class="col-12">
-                <span class="js-quiz-progress">1 out of 10</span>
-            </div>
-        </div>
+    </div>
 
-        <div class="row js-splash-box">
-            <div class="col-12">
-                <a href="#" class="js-start-button">Start Quiz!</a>
-            </div>
-        </div>
-
-        <div class="row js-question-box hidden">
-            <div class="col-12">
-                <span class="js-current-question">What is the answer</span>
-            </div>
-        </div>
-
-        <div class="row js-answer-details-box hidden">
-            <div class="col-12">
-                <p class="js-answer-details">Did you know...</p>
-            </div>
-        </div>
-
-        <div class="js-answer-picker-box hidden">
+    <div class="templates" style="display: none">
+        <div class="js-view-start-game">
             <div class="row">
-                <div class="col-6"><a href="#" class="js-quiz-answer">A</a></div>
-                <div class="col-6"><a href="#" class="js-quiz-answer">B</a></div>
-            </div>
-            <div class="row">
-                <div class="col-6"><a href="#" class="js-quiz-answer">C</a></div>
-                <div class="col-6"><a href="#" class="js-quiz-answer">D</a></div>
+                <div class="col-12 quiz-start-button-box">
+                    <a href="#" class="quiz-start-button">Start Quiz!</a>
+                </div>
             </div>
         </div>
 
-        <div class="row js-quiz-progress-box hidden">
+        <div class="row progress-box">
             <div class="col-12">
-                <span class="js-quiz-progress">5 correct, 2 incorrect</span>
+                <h3>1 out of 5</h3>
             </div>
         </div>
+        <div class="row question-box">
+            <div class="col-12">
+                <h2>How many seasons was Tasha Yar on the Enterprise as a main character?</h2>
+            </div>
+        </div>
+        <div class="row answers-box">
+            <div class="col-3"><a href="#" class="answer-choice js-answer-0">3</a></div>
+            <div class="col-3"><a href="#" class="answer-choice js-answer-1">1</a></div>
+            <div class="col-3"><a href="#" class="answer-choice js-answer-2">5</a></div>
+            <div class="col-3"><a href="#" class="answer-choice js-answer-3">2</a></div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <h3>2 correct, 3 wrong</h3>
+            </div>
+        </div>
+    </div>
 
-        <div class="row js-nav-box hidden">
-            <div class="col-12">
-                <form id="js-nav-form">
-                    <button type="submit">Submit</button>
-                </form>
-            </div>
-        </div>
-    </main>-->
+
 
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
         crossorigin="anonymous"></script>

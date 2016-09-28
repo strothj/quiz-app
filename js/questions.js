@@ -1,8 +1,8 @@
 'use strict';
 
-function QuizQuestion(question, answers, correctIndex, tidbit) {
+function quizQuestion(text, answers, correctIndex, tidbit) {
     return {
-        question: question,
+        text: text,
         answers: answers.map(function (item, i) {
             return {
                 text: item,
