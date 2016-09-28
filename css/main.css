@@ -43,8 +43,6 @@ a:hover {
 }
 
 .quiz-start-button-box {
-    margin-top: 100px;
-    margin-bottom: 100px;
     text-align: center;
 }
 
@@ -81,7 +79,12 @@ a:hover {
     display: none;
 }
 
-@media only screen and (min-width: 640px) {
+@media only screen and (min-width: 640px) and (min-height: 480px) {
     html { font-size: 16px; }
-    header > .row { margin-top: 50px; }/
+    header > .row { margin-top: 50px; }
+
+    .quiz-start-button-box {
+        margin-top: 100px;
+        margin-bottom: 100px;
+    }
 }
