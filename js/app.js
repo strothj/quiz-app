@@ -22,7 +22,7 @@ $(function () {
 
     summaryView.find("#js-continue").click(function (event) {
         event.preventDefault();
-        continueQuiz(state, questionPromptView, event);
+        continueQuiz(state, questionPromptView, summaryView, startGameView);
     });
 });
 
@@ -48,14 +48,19 @@ function submitAnswer(state, view, event) {
     setView(view);
 }
 
-function continueQuiz(state, view, event) {
+function continueQuiz(state, questionPromptView, summaryView, startGameView) {
     state.currentQuestion++;
     if (state.currentQuestion == QUIZ_LENGTH) {
-        alert("done");
+        state.presentFinal = true;
+        updateSummaryView(state, summaryView);
         return;
     }
-    updateQuestionPrompt(state, view);
-    setView(view);
+    if (state.presentFinal) {
+        startGame(state, startGameView);
+        return;
+    }
+    updateQuestionPrompt(state, questionPromptView);
+    setView(questionPromptView);
 }
 
 function updateQuestionPrompt(state, view) {
@@ -71,27 +76,46 @@ function updateQuestionPrompt(state, view) {
 
 function updateSummaryView(state, view) {
     var question = state.questions[state.currentQuestion];
-    view.find("h1").text(state.lastQuestionCorrect ? "Correct!" : "Wrong!");
-    view.find("h2").text(question.text);
-    view.find("#js-user-answer-header").text("Your Answer");
-    view.find("#js-user-answer").text(state.lastQuestionAnswer);
+    var header = view.find("h1");
+    var subheader = view.find("h2");
+    var userAnswerHeader = view.find("#js-user-answer-header");
+    var userAnswer = view.find("#js-user-answer");
     var expectedHeader = view.find("#js-expected-header");
     var expected = view.find("#js-expected");
-    if (state.lastQuestionCorrect) {
-        expectedHeader.addClass("hidden");
-        expected.addClass("hidden");
-    } else {
-        expectedHeader.removeClass("hidden");
-        expected.removeClass("hidden");
-        expectedHeader.text("Correct Answer");
-        expected.text(question.answers[question.correctIndex]);
+
+    if (!state.presentFinal) {
+        header.text(state.lastQuestionCorrect ? "Correct!" : "Wrong!");
+        subheader.text(question.text);
+        userAnswerHeader.text("Your Answer");
+        userAnswer.text(state.lastQuestionAnswer);
+
+        if (state.lastQuestionCorrect) {
+            expectedHeader.addClass("hidden");
+            expected.addClass("hidden");
+        } else {
+            expectedHeader.removeClass("hidden");
+            expected.removeClass("hidden");
+            expectedHeader.text("Correct Answer");
+            expected.text(question.answers[question.correctIndex]);
+        }
+        return;
     }
+
+    header.text("Quiz Complete!");
+    subheader.text("Play again?");
+    userAnswerHeader.text("Correct Answers");
+    userAnswer.text(state.questionsCorrect);
+    expectedHeader.text("Incorrect Answers");
+    expected.text(state.questionsWrong);
+    expectedHeader.removeClass("hidden");
+    expected.removeClass("hidden");
 }
 
 function clearState(state) {
     state.currentQuestion = 0;
     state.questionsCorrect = 0;
     state.questionsWrong = 0;
+    state.presentFinal = false;
 }
 
 function getViews() {
