@@ -1,15 +1,114 @@
 "use strict";
 
+var QUIZ_LENGTH = 5;
+
 $(function () {
     var views = getViews();
-    $(".container").append(views.startGame);
-    console.log(views.startGame);
+    var startGameView = views.startGame;
+    var questionPromptView = views.questionPrompt;
+    var summaryView = views.summary;
+    var state = {};
+    setView(startGameView);
+
+    startGameView.find("#js-start-game").click(function (event) {
+        event.preventDefault();
+        startGame(state, questionPromptView);
+    });
+
+    questionPromptView.find(".js-answer").click(function (event) {
+        event.preventDefault();
+        submitAnswer(state, summaryView, event);
+    });
+
+    summaryView.find("#js-continue").click(function (event) {
+        event.preventDefault();
+        continueQuiz(state, questionPromptView, event);
+    });
 });
+
+function startGame(state, view) {
+    clearState(state);
+    setRandomQuestions(state);
+    updateQuestionPrompt(state, view);
+    setView(view);
+}
+
+function submitAnswer(state, view, event) {
+    var currentQuestion = state.questions[state.currentQuestion];
+    var answer = $(event.currentTarget).text();
+    state.lastQuestionAnswer = answer;
+    if (answer === currentQuestion.answers[currentQuestion.correctIndex]) {
+        state.questionsCorrect++;
+        state.lastQuestionCorrect = true;
+    } else {
+        state.questionsWrong++;
+        state.lastQuestionCorrect = false;
+    }
+    updateSummaryView(state, view);
+    setView(view);
+}
+
+function continueQuiz(state, view, event) {
+    state.currentQuestion++;
+    if (state.currentQuestion == QUIZ_LENGTH) {
+        alert("done");
+        return;
+    }
+    updateQuestionPrompt(state, view);
+    setView(view);
+}
+
+function updateQuestionPrompt(state, view) {
+    view.find("#js-quiz-progress").text(state.currentQuestion + 1 + " out of " + QUIZ_LENGTH);
+    view.find("#js-question-text").text(state.questions[state.currentQuestion].text);
+    view.find(".js-answer").each(function (i) {
+        $(this).text(state.questions[state.currentQuestion].answers[i]);
+    });
+    view.find("#js-stats").text(
+        state.questionsCorrect + " correct, " + (state.questionsWrong) + " wrong"
+    );
+}
+
+function updateSummaryView(state, view) {
+    var question = state.questions[state.currentQuestion];
+    view.find("h1").text(state.lastQuestionCorrect ? "Correct!" : "Wrong!");
+    view.find("h2").text(question.text);
+    view.find("#js-user-answer-header").text("Your Answer");
+    view.find("#js-user-answer").text(state.lastQuestionAnswer);
+    var expectedHeader = view.find("#js-expected-header");
+    var expected = view.find("#js-expected");
+    if (state.lastQuestionCorrect) {
+        expectedHeader.addClass("hidden");
+        expected.addClass("hidden");
+    } else {
+        expectedHeader.removeClass("hidden");
+        expected.removeClass("hidden");
+        expectedHeader.text("Correct Answer");
+        expected.text(question.answers[question.correctIndex]);
+    }
+}
+
+function clearState(state) {
+    state.currentQuestion = 0;
+    state.questionsCorrect = 0;
+    state.questionsWrong = 0;
+}
 
 function getViews() {
     return {
-        startGame: $(".templates").find(".js-view-start-game").clone()
+        startGame: $(".templates").find("#js-view-start-game").clone(),
+        questionPrompt: $(".templates").find("#js-view-question-prompt").clone(),
+        summary: $(".templates").find("#js-view-summary").clone()
     }
+}
+
+function setView(view) {
+    $(".container").children().detach();
+    $(".container").append(view);
+}
+
+function setRandomQuestions(state) {
+    state.questions = getRandomQuestions(QUIZ_LENGTH);
 }
 
 function getQuestions() {

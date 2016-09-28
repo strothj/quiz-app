@@ -25,35 +25,64 @@
     </div>
 
     <div class="templates" style="display: none">
-        <div class="js-view-start-game">
+        <div id="js-view-start-game">
             <div class="row">
                 <div class="col-12 quiz-start-button-box">
-                    <a href="#" class="quiz-start-button">Start Quiz!</a>
+                    <a href="#" id="js-start-game" class="quiz-start-button">Start Quiz!</a>
                 </div>
             </div>
         </div>
 
-        <div class="row progress-box">
-            <div class="col-12">
-                <h3>1 out of 5</h3>
+        <div id="js-view-question-prompt">
+            <div class="row progress-box">
+                <div class="col-12">
+                    <h3 id="js-quiz-progress"></h3>
+                </div>
+            </div>
+            <div class="row question-box">
+                <div class="col-12">
+                    <h2 id="js-question-text"></h2>
+                </div>
+            </div>
+            <div class="row answers-box">
+                <div class="col-3">
+                    <a href="#" class="answer-choice js-answer"></a>
+                </div>
+                <div class="col-3">
+                    <a href="#" class="answer-choice js-answer"></a>
+                </div>
+                <div class="col-3">
+                    <a href="#" class="answer-choice js-answer"></a>
+                </div>
+                <div class="col-3">
+                    <a href="#" class="answer-choice js-answer"></a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <h3 id="js-stats"></h3>
+                </div>
             </div>
         </div>
-        <div class="row question-box">
-            <div class="col-12">
-                <h2>How many seasons was Tasha Yar on the Enterprise as a main character?</h2>
+
+        <div id="js-view-summary">
+            <div class="row">
+                <div class="col-12">
+                    <h1></h1>
+                    <h2></h2>
+                    <h3 id="js-user-answer-header"></h3>
+                    <p id="js-user-answer"></p>
+                    <h3 id="js-expected-header"></h3>
+                    <p id="js-expected"></p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3 continue-box">
+                    <a href="#" class="answer-choice" id="js-continue">Continue</a>
+                </div>
             </div>
         </div>
-        <div class="row answers-box">
-            <div class="col-3"><a href="#" class="answer-choice js-answer-0">3</a></div>
-            <div class="col-3"><a href="#" class="answer-choice js-answer-1">1</a></div>
-            <div class="col-3"><a href="#" class="answer-choice js-answer-2">5</a></div>
-            <div class="col-3"><a href="#" class="answer-choice js-answer-3">2</a></div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <h3>2 correct, 3 wrong</h3>
-            </div>
-        </div>
+
     </div>
 
 
